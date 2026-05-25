@@ -1619,8 +1619,8 @@ private lemma apply_buthe_sieve {t c C : ℝ}
   exact ⟨h_lb.trans h1, h2.trans h_ub⟩
 
 set_option maxHeartbeats 250000 in
--- 30-way case split over sub-intervals of `[100, 10^19]`; the default 200k
--- budget is just barely exceeded, so we lift it 25%.
+-- 30-way case split over sub-intervals of `[100, 10^19]`; just barely exceeds
+-- the default 200k budget so we lift it 25%.
 @[blueprint
   "bklnw-table_from_buthe"
   (title := "BKLNW table from Buthe")
@@ -1643,83 +1643,63 @@ theorem bklnw_table_from_buthe (u v c C : ℝ) (h : (u, v, c, C) ∈ table_from_
     · exact apply_buthe_sieve (by norm_num) (by norm_num) ht_lb h
     rcases le_or_gt t (8 * 10 ^ 10 : ℝ) with h2 | h2
     · -- row 2: (4×10^10, -0.73, 0.80) covers [4×10^10, 8×10^10]
-      refine apply_buthe_row (x := 4 * 10 ^ 10) (ub := 8 * 10 ^ 10)
+      exact apply_buthe_row (x := 4 * 10 ^ 10) (ub := 8 * 10 ^ 10)
           (Mψ_minus := -0.73) (Mψ_plus := 0.80)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (16 * 10 ^ 10 : ℝ) with h3 | h3
     · -- row 3: (8×10^10, -0.80, 0.86)
-      refine apply_buthe_row (x := 8 * 10 ^ 10) (ub := 16 * 10 ^ 10)
+      exact apply_buthe_row (x := 8 * 10 ^ 10) (ub := 16 * 10 ^ 10)
           (Mψ_minus := -0.80) (Mψ_plus := 0.86)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (32 * 10 ^ 10 : ℝ) with h4 | h4
     · -- row 4: (16×10^10, -0.88, 0.68)
-      refine apply_buthe_row (x := 16 * 10 ^ 10) (ub := 32 * 10 ^ 10)
+      exact apply_buthe_row (x := 16 * 10 ^ 10) (ub := 32 * 10 ^ 10)
           (Mψ_minus := -0.88) (Mψ_plus := 0.68)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (64 * 10 ^ 10 : ℝ) with h5 | h5
     · -- row 5: (32×10^10, -0.88, 0.78)
-      refine apply_buthe_row (x := 32 * 10 ^ 10) (ub := 64 * 10 ^ 10)
+      exact apply_buthe_row (x := 32 * 10 ^ 10) (ub := 64 * 10 ^ 10)
           (Mψ_minus := -0.88) (Mψ_plus := 0.78)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (128 * 10 ^ 10 : ℝ) with h6 | h6
     · -- row 6: (64×10^10, -0.66, 0.74)
-      refine apply_buthe_row (x := 64 * 10 ^ 10) (ub := 128 * 10 ^ 10)
+      exact apply_buthe_row (x := 64 * 10 ^ 10) (ub := 128 * 10 ^ 10)
           (Mψ_minus := -0.66) (Mψ_plus := 0.74)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (2 * 10 ^ 12 : ℝ) with h7 | h7
     · -- row 7: (10^12, -0.80, 0.81) covers [10^12, 2×10^12]; 128×10^10 = 1.28×10^12 ≥ 10^12
-      refine apply_buthe_row (x := 10 ^ 12) (ub := 2 * 10 ^ 12)
+      exact apply_buthe_row (x := 10 ^ 12) (ub := 2 * 10 ^ 12)
           (Mψ_minus := -0.80) (Mψ_plus := 0.81)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (4 * 10 ^ 12 : ℝ) with h8 | h8
     · -- row 8: (2×10^12, -0.79, 0.76)
-      refine apply_buthe_row (x := 2 * 10 ^ 12) (ub := 4 * 10 ^ 12)
+      exact apply_buthe_row (x := 2 * 10 ^ 12) (ub := 4 * 10 ^ 12)
           (Mψ_minus := -0.79) (Mψ_plus := 0.76)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (8 * 10 ^ 12 : ℝ) with h9 | h9
     · -- row 9: (4×10^12, -0.73, 0.73)
-      refine apply_buthe_row (x := 4 * 10 ^ 12) (ub := 8 * 10 ^ 12)
+      exact apply_buthe_row (x := 4 * 10 ^ 12) (ub := 8 * 10 ^ 12)
           (Mψ_minus := -0.73) (Mψ_plus := 0.73)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (16 * 10 ^ 12 : ℝ) with h10 | h10
     · -- row 10: (8×10^12, -0.80, 0.76)
-      refine apply_buthe_row (x := 8 * 10 ^ 12) (ub := 16 * 10 ^ 12)
+      exact apply_buthe_row (x := 8 * 10 ^ 12) (ub := 16 * 10 ^ 12)
           (Mψ_minus := -0.80) (Mψ_plus := 0.76)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     -- last sub-interval: (16×10^12, 32×10^12] via row 11: (16×10^12, -0.80, 0.68)
-    refine apply_buthe_row (x := 16 * 10 ^ 12) (ub := 32 * 10 ^ 12)
+    exact apply_buthe_row (x := 16 * 10 ^ 12) (ub := 32 * 10 ^ 12)
         (Mψ_minus := -0.80) (Mψ_plus := 0.68)
-      ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-    · simp [Buthe.table_1]
-    · linarith
-    · linarith
+      (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+      (by linarith) (by linarith)
   · -- Tuple 3: (u, v, c, C) = (100, 10^19, 0.94, 0.94)
     intro t ⟨ht_lb, ht_ub⟩
     -- The interval [100, 10^19] is covered by Buthe Eq (6.2) on [100, 5×10^10]
@@ -1727,209 +1707,151 @@ theorem bklnw_table_from_buthe (u v c C : ℝ) (h : (u, v, c, C) ∈ table_from_
     rcases le_or_gt t (5 * 10 ^ 10 : ℝ) with h | h
     · exact apply_buthe_sieve (by norm_num) (by norm_num) ht_lb h
     rcases le_or_gt t (8 * 10 ^ 10 : ℝ) with h2 | h2
-    · refine apply_buthe_row (x := 4 * 10 ^ 10) (ub := 8 * 10 ^ 10)
+    · exact apply_buthe_row (x := 4 * 10 ^ 10) (ub := 8 * 10 ^ 10)
           (Mψ_minus := -0.73) (Mψ_plus := 0.80)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (16 * 10 ^ 10 : ℝ) with h3 | h3
-    · refine apply_buthe_row (x := 8 * 10 ^ 10) (ub := 16 * 10 ^ 10)
+    · exact apply_buthe_row (x := 8 * 10 ^ 10) (ub := 16 * 10 ^ 10)
           (Mψ_minus := -0.80) (Mψ_plus := 0.86)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (32 * 10 ^ 10 : ℝ) with h4 | h4
-    · refine apply_buthe_row (x := 16 * 10 ^ 10) (ub := 32 * 10 ^ 10)
+    · exact apply_buthe_row (x := 16 * 10 ^ 10) (ub := 32 * 10 ^ 10)
           (Mψ_minus := -0.88) (Mψ_plus := 0.68)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (64 * 10 ^ 10 : ℝ) with h5 | h5
-    · refine apply_buthe_row (x := 32 * 10 ^ 10) (ub := 64 * 10 ^ 10)
+    · exact apply_buthe_row (x := 32 * 10 ^ 10) (ub := 64 * 10 ^ 10)
           (Mψ_minus := -0.88) (Mψ_plus := 0.78)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (128 * 10 ^ 10 : ℝ) with h6 | h6
-    · refine apply_buthe_row (x := 64 * 10 ^ 10) (ub := 128 * 10 ^ 10)
+    · exact apply_buthe_row (x := 64 * 10 ^ 10) (ub := 128 * 10 ^ 10)
           (Mψ_minus := -0.66) (Mψ_plus := 0.74)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (2 * 10 ^ 12 : ℝ) with h7 | h7
-    · refine apply_buthe_row (x := 10 ^ 12) (ub := 2 * 10 ^ 12)
+    · exact apply_buthe_row (x := 10 ^ 12) (ub := 2 * 10 ^ 12)
           (Mψ_minus := -0.80) (Mψ_plus := 0.81)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (4 * 10 ^ 12 : ℝ) with h8 | h8
-    · refine apply_buthe_row (x := 2 * 10 ^ 12) (ub := 4 * 10 ^ 12)
+    · exact apply_buthe_row (x := 2 * 10 ^ 12) (ub := 4 * 10 ^ 12)
           (Mψ_minus := -0.79) (Mψ_plus := 0.76)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (8 * 10 ^ 12 : ℝ) with h9 | h9
-    · refine apply_buthe_row (x := 4 * 10 ^ 12) (ub := 8 * 10 ^ 12)
+    · exact apply_buthe_row (x := 4 * 10 ^ 12) (ub := 8 * 10 ^ 12)
           (Mψ_minus := -0.73) (Mψ_plus := 0.73)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (16 * 10 ^ 12 : ℝ) with h10 | h10
-    · refine apply_buthe_row (x := 8 * 10 ^ 12) (ub := 16 * 10 ^ 12)
+    · exact apply_buthe_row (x := 8 * 10 ^ 12) (ub := 16 * 10 ^ 12)
           (Mψ_minus := -0.80) (Mψ_plus := 0.76)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (32 * 10 ^ 12 : ℝ) with h11 | h11
-    · refine apply_buthe_row (x := 16 * 10 ^ 12) (ub := 32 * 10 ^ 12)
+    · exact apply_buthe_row (x := 16 * 10 ^ 12) (ub := 32 * 10 ^ 12)
           (Mψ_minus := -0.80) (Mψ_plus := 0.68)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (64 * 10 ^ 12 : ℝ) with h12 | h12
-    · refine apply_buthe_row (x := 32 * 10 ^ 12) (ub := 64 * 10 ^ 12)
+    · exact apply_buthe_row (x := 32 * 10 ^ 12) (ub := 64 * 10 ^ 12)
           (Mψ_minus := -0.67) (Mψ_plus := 0.93)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (128 * 10 ^ 12 : ℝ) with h13 | h13
-    · refine apply_buthe_row (x := 64 * 10 ^ 12) (ub := 128 * 10 ^ 12)
+    · exact apply_buthe_row (x := 64 * 10 ^ 12) (ub := 128 * 10 ^ 12)
           (Mψ_minus := -0.78) (Mψ_plus := 0.77)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (2 * 10 ^ 14 : ℝ) with h14 | h14
-    · refine apply_buthe_row (x := 10 ^ 14) (ub := 2 * 10 ^ 14)
+    · exact apply_buthe_row (x := 10 ^ 14) (ub := 2 * 10 ^ 14)
           (Mψ_minus := -0.79) (Mψ_plus := 0.72)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (4 * 10 ^ 14 : ℝ) with h15 | h15
-    · refine apply_buthe_row (x := 2 * 10 ^ 14) (ub := 4 * 10 ^ 14)
+    · exact apply_buthe_row (x := 2 * 10 ^ 14) (ub := 4 * 10 ^ 14)
           (Mψ_minus := -0.60) (Mψ_plus := 0.76)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (8 * 10 ^ 14 : ℝ) with h16 | h16
-    · refine apply_buthe_row (x := 4 * 10 ^ 14) (ub := 8 * 10 ^ 14)
+    · exact apply_buthe_row (x := 4 * 10 ^ 14) (ub := 8 * 10 ^ 14)
           (Mψ_minus := -0.65) (Mψ_plus := 0.73)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (16 * 10 ^ 14 : ℝ) with h17 | h17
-    · refine apply_buthe_row (x := 8 * 10 ^ 14) (ub := 16 * 10 ^ 14)
+    · exact apply_buthe_row (x := 8 * 10 ^ 14) (ub := 16 * 10 ^ 14)
           (Mψ_minus := -0.81) (Mψ_plus := 0.88)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (32 * 10 ^ 14 : ℝ) with h18 | h18
-    · refine apply_buthe_row (x := 16 * 10 ^ 14) (ub := 32 * 10 ^ 14)
+    · exact apply_buthe_row (x := 16 * 10 ^ 14) (ub := 32 * 10 ^ 14)
           (Mψ_minus := -0.66) (Mψ_plus := 0.86)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (64 * 10 ^ 14 : ℝ) with h19 | h19
-    · refine apply_buthe_row (x := 32 * 10 ^ 14) (ub := 64 * 10 ^ 14)
+    · exact apply_buthe_row (x := 32 * 10 ^ 14) (ub := 64 * 10 ^ 14)
           (Mψ_minus := -0.74) (Mψ_plus := 0.86)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (128 * 10 ^ 14 : ℝ) with h20 | h20
-    · refine apply_buthe_row (x := 64 * 10 ^ 14) (ub := 128 * 10 ^ 14)
+    · exact apply_buthe_row (x := 64 * 10 ^ 14) (ub := 128 * 10 ^ 14)
           (Mψ_minus := -0.73) (Mψ_plus := 0.66)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (2 * 10 ^ 16 : ℝ) with h21 | h21
-    · refine apply_buthe_row (x := 10 ^ 16) (ub := 2 * 10 ^ 16)
+    · exact apply_buthe_row (x := 10 ^ 16) (ub := 2 * 10 ^ 16)
           (Mψ_minus := -0.88) (Mψ_plus := 0.74)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (4 * 10 ^ 16 : ℝ) with h22 | h22
-    · refine apply_buthe_row (x := 2 * 10 ^ 16) (ub := 4 * 10 ^ 16)
+    · exact apply_buthe_row (x := 2 * 10 ^ 16) (ub := 4 * 10 ^ 16)
           (Mψ_minus := -0.87) (Mψ_plus := 0.70)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (8 * 10 ^ 16 : ℝ) with h23 | h23
-    · refine apply_buthe_row (x := 4 * 10 ^ 16) (ub := 8 * 10 ^ 16)
+    · exact apply_buthe_row (x := 4 * 10 ^ 16) (ub := 8 * 10 ^ 16)
           (Mψ_minus := -0.65) (Mψ_plus := 0.73)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (16 * 10 ^ 16 : ℝ) with h24 | h24
-    · refine apply_buthe_row (x := 8 * 10 ^ 16) (ub := 16 * 10 ^ 16)
+    · exact apply_buthe_row (x := 8 * 10 ^ 16) (ub := 16 * 10 ^ 16)
           (Mψ_minus := -0.82) (Mψ_plus := 0.77)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (32 * 10 ^ 16 : ℝ) with h25 | h25
-    · refine apply_buthe_row (x := 16 * 10 ^ 16) (ub := 32 * 10 ^ 16)
+    · exact apply_buthe_row (x := 16 * 10 ^ 16) (ub := 32 * 10 ^ 16)
           (Mψ_minus := -0.71) (Mψ_plus := 0.92)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (64 * 10 ^ 16 : ℝ) with h26 | h26
-    · refine apply_buthe_row (x := 32 * 10 ^ 16) (ub := 64 * 10 ^ 16)
+    · exact apply_buthe_row (x := 32 * 10 ^ 16) (ub := 64 * 10 ^ 16)
           (Mψ_minus := -0.78) (Mψ_plus := 0.71)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (128 * 10 ^ 16 : ℝ) with h27 | h27
-    · refine apply_buthe_row (x := 64 * 10 ^ 16) (ub := 128 * 10 ^ 16)
+    · exact apply_buthe_row (x := 64 * 10 ^ 16) (ub := 128 * 10 ^ 16)
           (Mψ_minus := -0.94) (Mψ_plus := 0.82)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (256 * 10 ^ 16 : ℝ) with h28 | h28
-    · refine apply_buthe_row (x := 128 * 10 ^ 16) (ub := 256 * 10 ^ 16)
+    · exact apply_buthe_row (x := 128 * 10 ^ 16) (ub := 256 * 10 ^ 16)
           (Mψ_minus := -0.94) (Mψ_plus := 0.75)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     rcases le_or_gt t (512 * 10 ^ 16 : ℝ) with h29 | h29
-    · refine apply_buthe_row (x := 256 * 10 ^ 16) (ub := 512 * 10 ^ 16)
+    · exact apply_buthe_row (x := 256 * 10 ^ 16) (ub := 512 * 10 ^ 16)
           (Mψ_minus := -0.82) (Mψ_plus := 0.86)
-        ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-      · simp [Buthe.table_1]
-      · linarith
-      · linarith
+        (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+        (by linarith) (by linarith)
     -- last sub-interval: (512×10^16, 10^19] via row 30: (512×10^16, -0.83, 0.94)
     -- row 30 covers [512×10^16, 1024×10^16] and 10^19 = 1000×10^16 < 1024×10^16
-    refine apply_buthe_row (x := 512 * 10 ^ 16) (ub := 1024 * 10 ^ 16)
+    exact apply_buthe_row (x := 512 * 10 ^ 16) (ub := 1024 * 10 ^ 16)
         (Mψ_minus := -0.83) (Mψ_plus := 0.94)
-      ?_ (by norm_num) (by norm_num) (by norm_num) ?_ ?_
-    · simp [Buthe.table_1]
-    · linarith
-    · linarith
+      (by simp [Buthe.table_1]) (by norm_num) (by norm_num) (by norm_num)
+      (by linarith) (by linarith)
   · contradiction
 
 noncomputable def C_bk (b c C c₀ : ℝ) (k : ℕ) : ℝ :=
