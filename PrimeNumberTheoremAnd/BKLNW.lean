@@ -1624,7 +1624,7 @@ set_option maxHeartbeats 250000 in
 @[blueprint
   "bklnw-table_from_buthe"
   (title := "BKLNW table from Buthe")
-  (statement := /--  One has  \eqref{equ:c-Psi-C} for ($u$, $v$, $c$, $C$) as from the table extracted from Equation (6.2), Table 1 of Buthe. -/)
+  (statement := /--  One has  \eqref{equ:c-Psi-C} for ($u$, $v$, $c$, $C$) as from the table extracted from \cite[Eq. (6.2), Table 1]{Buthe}. -/)
   (proof := /-- This follows from Lemma \ref{buthe-eq-6-2}.-/)
   (latexEnv := "lemma")
   (discussion := 1261)]
