@@ -1608,22 +1608,24 @@ explicit about which sub-interval covers each `t`, so we package the work as:
     with bounds `[Mψ⁻, Mψ⁺]` already inside `[-c, C]`, applied via `Buthe.eq_6_2`
     (= Büthe Table 1).
 
-The existence is parametrised by an explicit pre-evaluated `ub = 2 * x` so each per-tuple
-witness can discharge `t ≤ ub` with plain `linarith` (without `ub`, the goal would be
-`t ≤ 2 * (some literal)` and require `nlinarith` to fold the multiplication). -/
+The existence is parametrised by an explicit pre-evaluated `two_x = 2 * x` (so the
+witness names the value of `2 * x` as a numeric literal).  This lets each per-tuple
+witness discharge `t ≤ two_x` with plain `linarith`; if the goal were instead
+`t ≤ 2 * (some literal)`, `linarith` would not fold the multiplication and we would
+need `nlinarith`. -/
 private lemma R_psi_bound_via_buthe {v c C : ℝ}
     (h_sieve_lb : -c ≤ (-0.8 : ℝ)) (h_sieve_ub : (0.81 : ℝ) ≤ C)
     (h_coverage : ∀ t ∈ Set.Icc (100 : ℝ) v,
       t ≤ 5 * 10 ^ 10 ∨
-      ∃ x ub Mψ_minus Mψ_plus, (x, Mψ_minus, Mψ_plus) ∈ Buthe.table_1 ∧
-        ub = 2 * x ∧ x ≤ t ∧ t ≤ ub ∧ -c ≤ Mψ_minus ∧ Mψ_plus ≤ C) :
+      ∃ x two_x Mψ_minus Mψ_plus, (x, Mψ_minus, Mψ_plus) ∈ Buthe.table_1 ∧
+        two_x = 2 * x ∧ x ≤ t ∧ t ≤ two_x ∧ -c ≤ Mψ_minus ∧ Mψ_plus ≤ C) :
     ∀ t ∈ Set.Icc (100 : ℝ) v, -c ≤ (t - ψ t) / sqrt t ∧ (t - ψ t) / sqrt t ≤ C := by
   intro t ht
   rcases h_coverage t ht with h_sieve
-    | ⟨x, ub, M_minus, M_plus, h_row, h_ub_eq, h_x_t, h_t_ub, h_neg, h_pos⟩
+    | ⟨x, two_x, M_minus, M_plus, h_row, h_two_x_eq, h_x_t, h_t_two_x, h_neg, h_pos⟩
   · obtain ⟨h1, h2⟩ := Buthe.sieve_bound t ht.1 h_sieve
     exact ⟨h_sieve_lb.trans h1, h2.trans h_sieve_ub⟩
-  · have h_t_2x : t ≤ 2 * x := h_ub_eq ▸ h_t_ub
+  · have h_t_2x : t ≤ 2 * x := h_two_x_eq ▸ h_t_two_x
     obtain ⟨h1, h2⟩ := Buthe.eq_6_2 x M_minus M_plus h_row t ⟨h_x_t, h_t_2x⟩
     exact ⟨h_neg.trans h1, h2.trans h_pos⟩
 
