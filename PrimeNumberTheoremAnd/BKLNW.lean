@@ -1597,12 +1597,20 @@ def table_from_buthe : List (ℝ × ℝ × ℝ × ℝ) := [
   (100, 10 ^ 19, 0.94, 0.94)
 ]
 
-/-- General dispatch for the BKLNW table: given that every `t ∈ [100, v]` is either in
-the sieve range `[100, 5×10^10]` or covered by some `Buthe.table_1` row whose `[Mψ⁻, Mψ⁺]`
-already fits inside `[-c, C]`, the bound `R_ψ(t) ∈ [-c, C]` follows from
-`Buthe.sieve_bound` and `Buthe.eq_6_2`.  The existence is parametrised by an explicit
-pre-evaluated `ub = 2 * x` so each per-tuple witness can discharge `t ≤ ub` with plain
-`linarith`. -/
+/-- Lean-side dispatch helper for `bklnw_table_from_buthe`. **No paper analog**:
+\cite{BKLNW} just states the table inline ("From [Büthe, Eq. (6.2), Table 1], we have:")
+and moves on; the dispatch is implicit in the informal text.  Lean requires us to be
+explicit about which sub-interval covers each `t`, so we package the work as:
+
+  - **Sieve fallback**: if `t ≤ 5×10^10`, use `Buthe.sieve_bound` (= Büthe Eq. (6.2)),
+    with `h_sieve_lb`/`h_sieve_ub` relaxing `[-0.8, 0.81]` to `[-c, C]`.
+  - **Row dispatch**: otherwise the witness provides a `Buthe.table_1` row covering `t`
+    with bounds `[Mψ⁻, Mψ⁺]` already inside `[-c, C]`, applied via `Buthe.eq_6_2`
+    (= Büthe Table 1).
+
+The existence is parametrised by an explicit pre-evaluated `ub = 2 * x` so each per-tuple
+witness can discharge `t ≤ ub` with plain `linarith` (without `ub`, the goal would be
+`t ≤ 2 * (some literal)` and require `nlinarith` to fold the multiplication). -/
 private lemma R_psi_bound_via_buthe {v c C : ℝ}
     (h_sieve_lb : -c ≤ (-0.8 : ℝ)) (h_sieve_ub : (0.81 : ℝ) ≤ C)
     (h_coverage : ∀ t ∈ Set.Icc (100 : ℝ) v,
