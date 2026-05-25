@@ -1632,8 +1632,8 @@ set_option maxHeartbeats 250000 in
 @[blueprint
   "bklnw-table_from_buthe"
   (title := "BKLNW table from Buthe")
-  (statement := /--  One has  \eqref{equ:c-Psi-C} for ($u$, $v$, $c$, $C$) as from the table extracted from \cite[Eq. (6.2), Table 1]{Buthe}. -/)
-  (proof := /-- This follows from Lemma \ref{buthe-eq-6-2}.-/)
+  (statement := /--  One has  \eqref{equ:c-Psi-C} for $(u, v, c, C)$ as in the inline table of \cite[Section 3, preceding Corollary 9.1]{BKLNW}, with values extracted from \cite[Eq. (6.2), Table 1]{Buthe}. -/)
+  (proof := /-- Per \cite[Section 3]{BKLNW}, the table combines the sieve-range bound \cite[Eq. (6.2)]{Buthe} (covering $[100, 5\times10^{10}]$) with the per-doubling-interval bounds of \cite[Table 1]{Buthe}.  Formally: dispatch via Lemma \ref{buthe-sieve-bound} on the sieve range, otherwise apply Lemma \ref{buthe-eq-6-2} to a covering row. -/)
   (latexEnv := "lemma")
   (discussion := 1261)]
 theorem bklnw_table_from_buthe (u v c C : ℝ) (h : (u, v, c, C) ∈ table_from_buthe) : ∀ x ∈ Set.Icc u v, -c ≤ (x - ψ x) / sqrt x ∧ (x - ψ x) / sqrt x ≤ C := by
