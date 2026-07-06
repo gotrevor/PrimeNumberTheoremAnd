@@ -1635,11 +1635,13 @@ def table_from_buthe : List (ℝ × ℝ × ℝ × ℝ) := [
   "bklnw-table_from_buthe"
   (title := "BKLNW table from Buthe")
   (statement := /-- One has \eqref{equ:c-Psi-C} for each aggregate row
-    extracted from Buthe's finite Eratosthenes-sieve computation, Table 1,
-    and Theorem 2(a). -/)
-  (proof := /-- This follows from Lemma \ref{buthe-sieve-bound},
-    Lemma \ref{buthe-table-1-to-32e12}, and
-    Lemma \ref{buthe-theorem-2a-normalized}. -/)
+    in the inline table of \cite[Section 3, preceding Corollary 9.1]{BKLNW},
+    with inputs extracted from \cite[Eq. (6.2), Table 1, Theorem 2(a)]{Buthe}. -/)
+  (proof := /-- The first row is the sieve-range bound of \cite[Eq. (6.2)]{Buthe}
+    via Lemma \ref{buthe-sieve-bound}; the second combines that sieve range with
+    the relevant rows of \cite[Table 1]{Buthe} via Lemma
+    \ref{buthe-table-1-to-32e12}; the third uses the normalized form of
+    \cite[Theorem 2(a)]{Buthe} via Lemma \ref{buthe-theorem-2a-normalized}. -/)
   (latexEnv := "lemma")
   (discussion := 1261)]
 theorem bklnw_table_from_buthe (u v c C : ℝ) (h : (u, v, c, C) ∈ table_from_buthe) : ∀ x ∈ Set.Icc u v, -c ≤ (x - ψ x) / sqrt x ∧ (x - ψ x) / sqrt x ≤ C := by
